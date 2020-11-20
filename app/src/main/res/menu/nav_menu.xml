@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/mainmenu"
+        android:title="@string/bottom_main"
+        android:icon="@drawable/home" />
+    <item android:id="@+id/foodmenu"
+        android:title="@string/bottom_food"
+        android:icon="@drawable/food" />
+    <item android:id="@+id/exemenu"
+        android:title="@string/bottom_exercises"
+        android:icon="@drawable/dumbbell" />
+    <item android:id="@+id/schemenu"
+        android:title="@string/bottom_schedule"
+        android:icon="@drawable/calendar" />
+
+</menu>

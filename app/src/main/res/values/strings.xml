@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">optimizedstepup</string>
+    <string name="bottom_main">Main menu</string>
+    <string name="bottom_food">Food</string>
+    <string name="bottom_exercises">Exercises</string>
+    <string name="bottom_schedule">Schedule</string>
+    <string name="food_recap">Today\'s food recap</string>
+    <string name="open_food_nav">Open Food Nav</string>
+    <string name="close_food_nav">Close Food Nav</string>
+    <string name="red_meat">Red Meat</string>
+    <string name="white_meat">White Meat</string>
+    <string name="cereals">Cereals</string>
+    <string name="dairy">Dairy</string>
+    <string name="nuts">Nuts</string>
+    <string name="eggs">Eggs</string>
+    <string name="sea_food">Sea Food</string>
+    <string name="fruits">Fruits</string>
+    <string name="vege">Vegetables</string>
+    <string name="supplements">Supplements</string>
+    <string name="meals">Meals</string>
+    <string name="search_food">Search</string>
+</resources>

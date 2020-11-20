@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/food_all"
+        android:title="ALL"
+        android:icon="@drawable/arrow_cut_icon"/>
+    <item android:id="@+id/redmeat"
+        android:title="@string/red_meat"
+        android:icon="@drawable/red_meat_icon" />
+    <item android:id="@+id/whitemeat"
+        android:title="@string/white_meat"
+        android:icon="@drawable/white_meat_icon" />
+    <item android:id="@+id/cereals"
+        android:title="@string/cereals"
+        android:icon="@drawable/cereal_icon" />
+    <item android:id="@+id/dairy"
+        android:title="@string/dairy"
+        android:icon="@drawable/dairy_icon" />
+    <item android:id="@+id/eggs"
+        android:title="@string/eggs"
+        android:icon="@drawable/eggs" />
+    <item android:id="@+id/nuts"
+        android:title="@string/nuts"
+        android:icon="@drawable/nuts" />
+    <item android:id="@+id/seafood"
+        android:title="@string/sea_food"
+        android:icon="@drawable/sea_food" />
+    <item android:id="@+id/fruits"
+        android:title="@string/fruits"
+        android:icon="@drawable/fruits_icon" />
+    <item android:id="@+id/vegetables"
+        android:title="@string/vege"
+        android:icon="@drawable/vege_icon" />
+    <item android:id="@+id/supplements"
+        android:title="@string/supplements"
+        android:icon="@drawable/supplements_icon" />
+    <item android:id="@+id/meal"
+        android:title="@string/meals"
+        android:icon="@drawable/chef" />
+    <group>
+     <item android:icon="@drawable/sharp_add_black_18dp"
+            android:title="Add"
+            android:id="@+id/add_food"/>
+    </group>
+
+</menu>
