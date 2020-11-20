@@ -78,7 +78,6 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         mAdapter = new FoodAdapter(foodDataset);
         recyclerView.setAdapter(mAdapter);
 
-
     }
 
     @Override
@@ -91,6 +90,7 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                mAdapter.getFilter().filter(query);
                 return false;
             }
 
@@ -119,12 +119,15 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()) {
 
+            case R.id.food_all:
+                searchView.setQuery(null,true);
+                searchView.setClickable(true);
             case R.id.redmeat:
-                mAdapter.getFilter().filter("redmeat");
+                searchView.setQuery("redmeat",true);
                 searchView.setClickable(false);
                 break;
             case R.id.whitemeat:
-                mAdapter.getFilter().filter("whitemeat");
+                searchView.setQuery("whitemeat",true);
                 searchView.setClickable(false);
                 break;
             case R.id.cereals:
@@ -144,7 +147,8 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
                 searchView.setClickable(false);
                 break;
             case R.id.seafood:
-                mAdapter.getFilter().filter("seafood");
+                searchView.setQuery("seafood",true);
+                //mAdapter.getFilter().filter("seafood");
                 searchView.setClickable(false);
                 break;
             case R.id.fruits:
