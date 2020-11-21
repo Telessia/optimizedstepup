@@ -90,14 +90,14 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mAdapter.getFilter().filter(query);
+                mAdapter.getFilterByName().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 // search goes here !!
-                mAdapter.getFilter().filter(newText);
+                mAdapter.getFilterByName().filter(newText);
                 return false;
             }
             });
@@ -120,54 +120,68 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
 
             case R.id.food_all:
-                searchView.setQuery(null,true);
-                searchView.setClickable(true);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter(null);
+                searchView.setEnabled(true);
+                break;
             case R.id.redmeat:
-                searchView.setQuery("redmeat",true);
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("red_meat");
+                searchView.setEnabled(false);
                 break;
             case R.id.whitemeat:
-                searchView.setQuery("whitemeat",true);
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("white_meat");
+                searchView.setEnabled(false);
                 break;
             case R.id.cereals:
-                mAdapter.getFilter().filter("cereals");
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("cereals");
+                searchView.setEnabled(false);
                 break;
             case R.id.dairy:
-                mAdapter.getFilter().filter("dairy");
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("dairy");
+                searchView.setEnabled(false);
                 break;
             case R.id.eggs:
-                mAdapter.getFilter().filter("eggs");
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("eggs");
+                searchView.setEnabled(false);
                 break;
             case R.id.nuts:
-                mAdapter.getFilter().filter("nuts");
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("nuts");
+                searchView.setEnabled(false);
                 break;
             case R.id.seafood:
-                searchView.setQuery("seafood",true);
-                //mAdapter.getFilter().filter("seafood");
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("sea_food");
+                searchView.setEnabled(false);
                 break;
             case R.id.fruits:
-                mAdapter.getFilter().filter("fruits");
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("fruits");
+                searchView.setEnabled(false);
                 break;
             case R.id.vegetables:
-                mAdapter.getFilter().filter("vegetables");
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("vegetables");
+                searchView.setEnabled(false);
                 break;
             case R.id.supplements:
-                mAdapter.getFilter().filter("supplements");
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("supplements");
+                searchView.setEnabled(false);
                 break;
             case R.id.meal:
-                mAdapter.getFilter().filter("meal");
-                searchView.setClickable(false);
+                mAdapter.restoreFilter();
+                mAdapter.getFilterByType().filter("meal");
+                searchView.setEnabled(false);
                 break;
+            case R.id.add_food:
 
+                break;
         }
         return true;
     }

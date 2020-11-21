@@ -19,6 +19,7 @@ import fr.telecorp.optimizedstepup.R;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
     private FoodList foodDataset;
     private FoodList originalItems = new FoodList();
+    private FoodList currentItemsByTypes = new FoodList();
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -81,6 +82,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.value.setHint(String.valueOf(foodDataset.get(position).getCurrentValue()));
     }
 
+    public void restoreFilter(){
+        foodDataset = originalItems;
+    }
+
+    public void saveCurrentType(){
+        currentItemsByTypes = foodDataset;
+    }
+
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
@@ -95,7 +104,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         }
     }
 
-    public Filter getFilter() {
+    public Filter getFilterByName() {
         Filter filter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {//Filtre grace aux -
@@ -107,8 +116,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
                 if (constraint == null || constraint.length() == 0) {
                     //synchronized (mLock) {
-                        results.values = originalItems;
-                        results.count = originalItems.size();
+                        results.values = currentItemsByTypes;
+                        results.count = currentItemsByTypes.size();
                         return results;
                     }
 
@@ -128,7 +137,48 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 foodDataset = (FoodList) results.values;
-                notifyDataSetChanged();//Rafraichit la liste de MusicActivity pour afficher-
+                notifyDataSetChanged();//Rafraichit la liste de FoodActivity pour afficher-
+                //-la nouvelle liste filtrée
+            }
+        };
+        return filter;
+    }
+
+    public Filter getFilterByType() {
+        Filter filter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {//Filtre grace aux -
+                //- lettres du TextWatcher cf.MusicActivity
+
+                FilterResults results = new FilterResults();
+
+                FoodList FilteredFood = new FoodList();
+
+                if (constraint == null || constraint.length() == 0) {
+                    //synchronized (mLock) {
+                    results.values = originalItems;
+                    results.count = originalItems.size();
+                    return results;
+                }
+
+                constraint = constraint.toString().toLowerCase();
+
+                for (int i = 0; i < foodDataset.size(); i++) {
+                    String filteredtitle = foodDataset.get(i).getType();
+                    if (filteredtitle.toLowerCase().startsWith(constraint.toString())||filteredtitle.toLowerCase().contains(constraint.toString())) {
+                        FilteredFood.add(foodDataset.get(i));
+                    }
+                }
+                results.count = FilteredFood.size();
+                results.values = FilteredFood;
+                return results;
+            }
+            //Applique le résultat sur la liste
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                foodDataset = (FoodList) results.values;
+                currentItemsByTypes = foodDataset;
+                notifyDataSetChanged();//Rafraichit la liste de FoodActivity pour afficher-
                 //-la nouvelle liste filtrée
             }
         };
