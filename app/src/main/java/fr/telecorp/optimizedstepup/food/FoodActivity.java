@@ -1,5 +1,7 @@
 package fr.telecorp.optimizedstepup.food;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,10 +29,11 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
     private FragmentContainerView fragFrame;
     private FoodList foodDataset;
     private RecyclerView recyclerView;
-    private FoodAdapter mAdapter;
+    private FoodAdapter foodAdapter;
     private LinearLayoutManager layoutManager;
     private final static String DATA_KEY = "DATA_KEY";
     private final static String TAG_1 = "ALL_FOOD_FRAGMENT";
+    private final static int ADD_KEY = 1;
     private SearchView searchView;
 
     @Override
@@ -75,9 +78,20 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        mAdapter = new FoodAdapter(foodDataset);
-        recyclerView.setAdapter(mAdapter);
+        foodAdapter = new FoodAdapter(foodDataset);
+        recyclerView.setAdapter(foodAdapter);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Food f = data.getParcelableExtra("food_datas");
+            foodDataset.add(f);
+            foodAdapter.notifyDataSetChanged();
+            //save(this, remindlist);
+        }
     }
 
     @Override
@@ -90,24 +104,20 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                mAdapter.getFilterByName().filter(query);
+                foodAdapter.getFilterByName().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 // search goes here !!
-                mAdapter.getFilterByName().filter(newText);
+                foodAdapter.getFilterByName().filter(newText);
                 return false;
             }
             });
         return true;
     }
 
-    public boolean loadFoodValues(){
-
-        return true;
-    }
 /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -120,67 +130,68 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()) {
 
             case R.id.food_all:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter(null);
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter(null);
                 searchView.setEnabled(true);
                 break;
             case R.id.redmeat:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("red_meat");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("red_meat");
                 searchView.setEnabled(false);
                 break;
             case R.id.whitemeat:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("white_meat");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("white_meat");
                 searchView.setEnabled(false);
                 break;
             case R.id.cereals:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("cereals");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("cereals");
                 searchView.setEnabled(false);
                 break;
             case R.id.dairy:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("dairy");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("dairy");
                 searchView.setEnabled(false);
                 break;
             case R.id.eggs:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("eggs");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("eggs");
                 searchView.setEnabled(false);
                 break;
             case R.id.nuts:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("nuts");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("nuts");
                 searchView.setEnabled(false);
                 break;
             case R.id.seafood:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("sea_food");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("sea_food");
                 searchView.setEnabled(false);
                 break;
             case R.id.fruits:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("fruits");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("fruits");
                 searchView.setEnabled(false);
                 break;
             case R.id.vegetables:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("vegetables");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("vegetables");
                 searchView.setEnabled(false);
                 break;
             case R.id.supplements:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("supplements");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("supplements");
                 searchView.setEnabled(false);
                 break;
             case R.id.meal:
-                mAdapter.restoreFilter();
-                mAdapter.getFilterByType().filter("meal");
+                foodAdapter.restoreFilter();
+                foodAdapter.getFilterByType().filter("meal");
                 searchView.setEnabled(false);
                 break;
             case R.id.add_food:
-
+                Intent intent = new Intent(this, AddFoodActivity.class);
+                startActivityForResult(intent, ADD_KEY);
                 break;
         }
         return true;
