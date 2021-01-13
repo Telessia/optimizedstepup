@@ -3,26 +3,48 @@ package fr.telecorp.optimizedstepup.food;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 
+@Entity
 public class Food implements Parcelable {
 
+    @PrimaryKey
     private int id = -1;
+    @ColumnInfo(name = "NAME")
     private String name = "empty";
+    @ColumnInfo(name = "TYPE")
     private String type = "empty";
+    @ColumnInfo(name = "UNIT")
     private String unit = "empty";
+    @ColumnInfo(name = "CALORIES")
     private float calories = 0;
+    @ColumnInfo(name = "PROTEINS")
     private float proteins = 0;
+    @ColumnInfo(name = "GLUCIDS")
     private float glucids = 0;
+    @ColumnInfo(name = "LIPIDS")
     private float lipids = 0;
+    @ColumnInfo(name = "FIBERS")
     private float fibers = 0;
+    @ColumnInfo(name = "IRON")
     private float iron = 0;
+    @ColumnInfo(name = "ZINC")
     private float zinc = 0;
+    @ColumnInfo(name = "MAGNESIUM")
     private float magnesium = 0;
+    @ColumnInfo(name = "OM3")
     private float om3 = 0;
+    @ColumnInfo(name = "OM6")
     private float om6 = 0;
+    @ColumnInfo(name = "OM9")
     private float om9 = 0;
+    @ColumnInfo(name = "MAINVITAMIN")
     private String mainVitamin = "empty";
+    @ColumnInfo(name = "CURRENTVALUE")
     private float currentValue = 0;
 
     public Food() {

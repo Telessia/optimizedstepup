@@ -1,4 +1,4 @@
-package fr.telecorp.optimizedstepup.food;
+/*package fr.telecorp.optimizedstepup.food;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -39,3 +39,4 @@ public class AddFoodActivity extends AppCompatActivity {
     }
 
 }
+*/
