@@ -7,6 +7,7 @@
     <string name="food_recap">Today\'s food recap</string>
     <string name="open_food_nav">Open Food Nav</string>
     <string name="close_food_nav">Close Food Nav</string>
+
     <string name="red_meat">Red Meat</string>
     <string name="white_meat">White Meat</string>
     <string name="cereals">Cereals</string>
@@ -15,8 +16,42 @@
     <string name="eggs">Eggs</string>
     <string name="sea_food">Sea Food</string>
     <string name="fruits">Fruits</string>
-    <string name="vege">Vegetables</string>
+    <string name="vegetables">Vegetables</string>
     <string name="supplements">Supplements</string>
     <string name="meals">Meals</string>
+
     <string name="search_food">Search</string>
+
+    <string name="name">Name</string>
+    <string name="calories">Calories</string>
+    <string name="proteins">Proteins</string>
+    <string name="glucids">Glucids</string>
+    <string name="lipids">Lipids</string>
+    <string name="saturated">Saturated</string>
+    <string name="fibers">Fibers</string>
+    <string name="iron">Iron</string>
+    <string name="zinc">Zinc</string>
+    <string name="magnesium">Magnesium</string>
+    <string name="manganese">Manganese</string>
+    <string name="om3">Om3</string>
+    <string name="om6">Om6</string>
+    <string name="om9">Om9</string>
+    <string name="main_vitamin">Main Vitamin</string>
+
+    <string name="vitamin_a">Vitamin A</string>
+    <string name="vitamin_b1">Vitamin B1</string>
+    <string name="vitamin_b2">Vitamin B2</string>
+    <string name="vitamin_b3">Vitamin B3</string>
+    <string name="vitamin_b5">Vitamin B5</string>
+    <string name="vitamin_b6">Vitamin B6</string>
+    <string name="vitamin_b8">Vitamin B8</string>
+    <string name="vitamin_b9">Vitamin B9</string>
+    <string name="vitamin_b12">Vitamin B12</string>
+    <string name="vitamin_c">Vitamin C</string>
+    <string name="vitamin_d">Vitamin D</string>
+    <string name="vitamin_e">Vitamin E</string>
+    <string name="vitamin_k">Vitamin K</string>
+
+    <string name="empty">Empty</string>
+
 </resources>

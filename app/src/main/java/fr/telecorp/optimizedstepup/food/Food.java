@@ -28,6 +28,8 @@ public class Food implements Parcelable {
     private float glucids = 0;
     @ColumnInfo(name = "LIPIDS")
     private float lipids = 0;
+    @ColumnInfo(name = "SATURATED")
+    private float saturated = 0;
     @ColumnInfo(name = "FIBERS")
     private float fibers = 0;
     @ColumnInfo(name = "IRON")
@@ -36,6 +38,8 @@ public class Food implements Parcelable {
     private float zinc = 0;
     @ColumnInfo(name = "MAGNESIUM")
     private float magnesium = 0;
+    @ColumnInfo(name="MANGANESE")
+    private float manganese = 0;
     @ColumnInfo(name = "OM3")
     private float om3 = 0;
     @ColumnInfo(name = "OM6")

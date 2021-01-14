@@ -13,7 +13,7 @@ public interface FoodDao {
     List<Food> getAll();
 
     @Query("SELECT * FROM food WHERE type IN (:foodType)")
-    List<Food> loadAllByIds(String foodType);
+    List<Food> loadAllByTypes(String foodType);
 
     @Insert
     void insertAll(Food... food);

@@ -31,7 +31,7 @@
             android:icon="@drawable/fruits_icon" />
         <item android:id="@+id/vegetables"
             android:title="@string/vege"
-            android:icon="@drawable/vege_icon" />
+            android:icon="@drawable/vegetables_icon" />
         <item android:id="@+id/supplements"
             android:title="@string/supplements"
             android:icon="@drawable/supplements_icon" />

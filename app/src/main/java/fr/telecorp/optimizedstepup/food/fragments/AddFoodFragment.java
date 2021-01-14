@@ -1,4 +1,7 @@
 package fr.telecorp.optimizedstepup.food.fragments;
 
-public class AddFoodFragment {
+import androidx.fragment.app.Fragment;
+
+public class AddFoodFragment extends Fragment {
+
 }

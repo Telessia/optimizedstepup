@@ -1,4 +1,4 @@
-/*package fr.telecorp.optimizedstepup.food;
+package fr.telecorp.optimizedstepup.food;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import fr.telecorp.optimizedstepup.R;
 
 public class AddFoodActivity extends AppCompatActivity {
+    //@Todo
 
     private int requestcode;
     private Button confirmbutton;
@@ -25,7 +26,7 @@ public class AddFoodActivity extends AppCompatActivity {
             requestcode = intentIn.getIntExtra("requestcode", -1);
         }
 
-        confirmbutton = findViewById(R.id.savebutton);
+        //confirmbutton = findViewById(R.id.savebutton);
         confirmbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,4 +40,3 @@ public class AddFoodActivity extends AppCompatActivity {
     }
 
 }
-*/

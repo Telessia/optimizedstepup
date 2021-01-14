@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.navigation.NavigationView;
 
 import fr.telecorp.optimizedstepup.R;
+import fr.telecorp.optimizedstepup.food.fragments.AddFoodFragment;
 
 public class FoodActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -190,7 +191,7 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
                 searchView.setEnabled(false);
                 break;
             case R.id.add_food:
-                Intent intent = new Intent(this, AddFoodActivity.class);
+                Intent intent = new Intent(this, AddFoodFragment.class);
                 startActivityForResult(intent, ADD_KEY);
                 break;
         }
