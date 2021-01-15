@@ -30,16 +30,16 @@ public class FoodFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_food, null);
         btn= view.findViewById(R.id.btn_food);
         /**GET BUNDLE**/
-        Bundle bundle = getArguments();
+       /* Bundle bundle = getArguments();
         if (bundle != null) {
             dataSet = bundle.getParcelable(DATA_KEY);
         }
-
+*/
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), FoodActivity.class);
-                intent.putExtra(DATA_KEY,(Parcelable) dataSet);
+                //intent.putExtra(DATA_KEY,(Parcelable) dataSet);
                 startActivity(intent);
             }
         });

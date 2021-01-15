@@ -39,8 +39,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha03'
     //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation "androidx.room:room-runtime:2.2.6"
-    annotationProcessor "androidx.room:room-compiler:2.2.6"
     compileOnly "org.projectlombok:lombok:1.18.16"
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    implementation "androidx.room:room-runtime:2.2.6"
+    annotationProcessor "androidx.room:room-compiler:2.2.6"
 }

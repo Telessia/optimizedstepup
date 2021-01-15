@@ -23,6 +23,7 @@
     <string name="search_food">Search</string>
 
     <string name="name">Name</string>
+    <string name="unit">Unit</string>
     <string name="calories">Calories</string>
     <string name="proteins">Proteins</string>
     <string name="glucids">Glucids</string>
@@ -37,6 +38,9 @@
     <string name="om6">Om6</string>
     <string name="om9">Om9</string>
     <string name="main_vitamin">Main Vitamin</string>
+
+    <string name="gram">Gram</string>
+    <string name="ml">ml</string>
 
     <string name="vitamin_a">Vitamin A</string>
     <string name="vitamin_b1">Vitamin B1</string>

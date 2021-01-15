@@ -13,31 +13,31 @@
             android:icon="@drawable/white_meat_icon" />
         <item android:id="@+id/cereals"
             android:title="@string/cereals"
-            android:icon="@drawable/cereal_icon" />
+            android:icon="@drawable/cereals_icon" />
         <item android:id="@+id/dairy"
             android:title="@string/dairy"
             android:icon="@drawable/dairy_icon" />
         <item android:id="@+id/eggs"
             android:title="@string/eggs"
-            android:icon="@drawable/eggs" />
+            android:icon="@drawable/eggs_icon" />
         <item android:id="@+id/nuts"
             android:title="@string/nuts"
-            android:icon="@drawable/nuts" />
+            android:icon="@drawable/nuts_icon" />
         <item android:id="@+id/seafood"
             android:title="@string/sea_food"
-            android:icon="@drawable/sea_food" />
+            android:icon="@drawable/sea_food_icon" />
         <item android:id="@+id/fruits"
             android:title="@string/fruits"
             android:icon="@drawable/fruits_icon" />
         <item android:id="@+id/vegetables"
-            android:title="@string/vege"
+            android:title="@string/vegetables"
             android:icon="@drawable/vegetables_icon" />
         <item android:id="@+id/supplements"
             android:title="@string/supplements"
             android:icon="@drawable/supplements_icon" />
         <item android:id="@+id/meal"
             android:title="@string/meals"
-            android:icon="@drawable/chef" />
+            android:icon="@drawable/meal_icon" />
     </group>
     <group>
      <item android:icon="@drawable/sharp_add_black_18dp"

@@ -12,6 +12,12 @@ public class FoodList extends ArrayList<Food> implements Parcelable {
 
     }
 
+    public static FoodList toFoodList(List<Food> classicList){ //Convert classic list to foodlist
+        FoodList fl = new FoodList();
+        fl.addAll(classicList);
+        return fl;
+    }
+
     @Override
     public int describeContents() {
         return 0;

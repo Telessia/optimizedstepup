@@ -10,13 +10,13 @@ import java.util.List;
 @Dao
 public interface FoodDao {
     @Query("SELECT * FROM food")
-    List<Food> getAll();
+    List <Food> getAll();
 
-    @Query("SELECT * FROM food WHERE type IN (:foodType)")
-    List<Food> loadAllByTypes(String foodType);
+   // @Query("SELECT * FROM food WHERE type IN (:foodType)")
+    // FoodList loadAllByTypes(String foodType);
 
     @Insert
-    void insertAll(Food... food);
+    void insert(Food food);
 
     @Delete
     void delete(Food food);

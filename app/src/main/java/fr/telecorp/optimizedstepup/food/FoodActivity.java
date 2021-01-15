@@ -16,8 +16,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.telecorp.optimizedstepup.R;
 import fr.telecorp.optimizedstepup.food.fragments.AddFoodFragment;
@@ -42,9 +46,26 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
 
-        if (getIntent().getExtras() != null){
+        /*if (getIntent().getExtras() != null){
             foodDataset = getIntent().getExtras().getParcelable(DATA_KEY);
         }
+
+         */
+
+        /* DATABASE THREAD */
+        new Thread(new Runnable() {
+            public void run() {
+
+                FoodDatabase db = Room.databaseBuilder(getApplicationContext(),
+                        FoodDatabase.class, "food_database").build();
+                FoodDao foodDao = db.foodDao();
+                Food f = new Food("Tuna","SeaFood","gram",100);
+                //foodDao.insert(f);
+                List<Food> lf = foodDao.getAll();
+                foodDataset = FoodList.toFoodList(lf);
+            }
+        }).start();
+        /* DATABASE THREAD */
 
         toolbar=findViewById(R.id.food_toolbar);
         setSupportActionBar(toolbar);

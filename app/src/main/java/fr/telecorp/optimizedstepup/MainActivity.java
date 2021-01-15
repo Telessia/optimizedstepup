@@ -3,6 +3,7 @@ package fr.telecorp.optimizedstepup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import fr.telecorp.optimizedstepup.food.Food;
+import fr.telecorp.optimizedstepup.food.FoodDao;
+import fr.telecorp.optimizedstepup.food.FoodDatabase;
 import fr.telecorp.optimizedstepup.food.FoodList;
 import fr.telecorp.optimizedstepup.fragments.ExerciseFragment;
 import fr.telecorp.optimizedstepup.fragments.FoodFragment;
@@ -48,8 +51,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*
         writeFile();
         dataLoaded=loadFile();
+        */
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -79,12 +84,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                                 break;
                             case R.id.foodmenu:
                                 if (current_TAG != TAG_2) {
-                                    Bundle bundle = new Bundle();
-                                    bundle.putParcelable("DATA_KEY", dataLoaded);
+                                   // Bundle bundle = new Bundle();
+                                   // bundle.putParcelable("DATA_KEY", dataLoaded);
                                     current_TAG = TAG_2;
                                     bottomNavigationView.getMenu().findItem(R.id.foodmenu).setChecked(true);
                                     foodFragment = new FoodFragment();
-                                    foodFragment.setArguments(bundle);
+                                    //foodFragment.setArguments(bundle);
                                     getSupportFragmentManager().beginTransaction().replace(fragFrame.getId(), foodFragment, TAG_2).commit();
                                 }
                                 break;
@@ -101,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                         }
                         return true;
         }
-
+/*
     public FoodList loadFile(){
         File folder = getFilesDir();
         Log.i("PATH", folder.toString());
@@ -249,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
             return true;
         }
-
+*/
         public boolean loadHistory(){
 
         return true;
