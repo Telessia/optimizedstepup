@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -20,4 +21,13 @@ public interface FoodDao {
 
     @Delete
     void delete(Food food);
+
+    @Query("DELETE FROM food")
+    public void nukeTable();
+
+    @Update
+    void updateFood(Food food);
+
+    @Update
+    public int updateFoods(List<Food> foods);
 }

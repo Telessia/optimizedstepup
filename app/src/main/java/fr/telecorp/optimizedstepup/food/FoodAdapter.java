@@ -1,5 +1,8 @@
 package fr.telecorp.optimizedstepup.food;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,7 +10,9 @@ import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,11 +20,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.telecorp.optimizedstepup.R;
+import lombok.NonNull;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
     private FoodList foodDataset;
     private FoodList originalItems = new FoodList();
     private FoodList currentItemsByTypes = new FoodList();
+    private Activity parentActivity;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -50,36 +57,74 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public FoodAdapter(FoodList myDataset) {
-        foodDataset = myDataset;
-        cloneItems(myDataset);
+    public FoodAdapter(FoodList pDataset, Activity pActivity) {
+        foodDataset = pDataset;
+        cloneItems(pDataset);
+        this.parentActivity = pActivity;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
     public FoodAdapter.FoodViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
-        // create a new view
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.cell_food, parent, false);
+                // create a new view
+                View v = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.cell_food, parent, false);
 
-        return new FoodViewHolder(v);
+                return new FoodViewHolder(v);
     }
+
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(FoodViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final FoodViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.iv.setImageResource(foodDataset.get(position).getId());
+        String type = foodDataset.get(position).getType();
+        String[] splited = type.split(" ");
+        if (splited.length > 1) {
+            type = (splited[0] + "_" + splited[1] + "_icon");
+        } else {
+            type = splited[0] + "_icon";
+        }
+        type = type.toLowerCase();
+        int drawableId = parentActivity.getResources().getIdentifier(type, "drawable", parentActivity.getPackageName());
+        holder.iv.setImageResource(drawableId);
         holder.name.setText(foodDataset.get(position).getName());
         holder.unit.setText(foodDataset.get(position).getUnit());
-        holder.calories.setText("Calories :\n" + foodDataset.get(position).getCalories() +" kCal");
-        holder.proteines.setText("Proteins :\n" + foodDataset.get(position).getProteins() +" g");
+        holder.calories.setText("Calories :\n" + foodDataset.get(position).getCalories() + " kCal");
+        holder.proteines.setText("Proteins :\n" + foodDataset.get(position).getProteins() + " g");
         holder.glucids.setText("Glucids :\n" + foodDataset.get(position).getGlucids() + " g");
-        holder.lipids.setText("Lipids :\n" + foodDataset.get(position).getLipids() +" g");
-        holder.fibers.setText("Fibers :\n" + foodDataset.get(position).getFibers() +" g");
+        holder.lipids.setText("Lipids :\n" + foodDataset.get(position).getLipids() + " g");
+        holder.fibers.setText("Fibers :\n" + foodDataset.get(position).getFibers() + " g");
         holder.value.setHint(String.valueOf(foodDataset.get(position).getCurrentValue()));
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                foodDataset.remove(holder.getAdapterPosition());
+                                notifyDataSetChanged();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                //NOTHING
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                builder.setMessage("Do you really want to delete this item?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+                return true;
+            }
+        });
     }
 
     public void restoreFilter(){
@@ -102,6 +147,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             Food f = (Food) iterator.next();
             originalItems.add(f);
         }
+    }
+
+    public interface OnItemLongClickListener {
+        public boolean onItemLongClicked(int position);
     }
 
     public Filter getFilterByName() {

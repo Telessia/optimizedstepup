@@ -14,5 +14,10 @@
     <style name="CustomTextView" parent="android:Widget.TextView">
         <item name="android:textSize">8sp</item>
     </style>
+    
+    <style name="RadioCustom" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorControlNormal">@color/DarkGreen</item>
+        <item name="colorControlActivated">@color/LimeGreen</item>
+    </style>
 
 </resources>

@@ -2,6 +2,7 @@ package fr.telecorp.optimizedstepup.food;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+import androidx.room.util.StringUtil;
 
 import fr.telecorp.optimizedstepup.R;
 
@@ -66,7 +69,9 @@ public class AddFoodActivity extends AppCompatActivity {
         unitButton = findViewById(R.id.add_unit);
         vitaminButton = findViewById(R.id.add_mainvitamin);
         radioGroupType = findViewById(R.id.radioGroupType);
+        radioGroupType.check(R.id.radioButton_eggs);
         radioGroupUnit = findViewById(R.id.radioGroupUnit);
+        radioGroupUnit.check(R.id.radioButton_gram);
         radioGroupVitamin  = findViewById(R.id.radioGroupVitamin);
 
         /* EDIT TEXT */
@@ -97,31 +102,93 @@ public class AddFoodActivity extends AppCompatActivity {
                 radioButtonUnit = findViewById(radioGroupUnit.getCheckedRadioButtonId());
                 radioButtonVitamin = findViewById(radioGroupVitamin.getCheckedRadioButtonId());
 
+                    if (name.getText().length() <= 0 || Float.parseFloat(calories.getText().toString()) <= 0) {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Name, Type, Unit and Calories values are required", Toast.LENGTH_LONG);
+                        toast.show();
+                    } else {
+                        String type_for_class;
+                        String[] typeS = type.split("_");
+                        if(typeS.length >= 3) {
+                            typeS[0] = typeS[0].substring(0, 1).toUpperCase() + typeS[0].substring(1).toLowerCase();
+                            type_for_class = typeS[0] + " " + typeS[1];
+                        } else{
+                            typeS[0] = typeS[0].substring(0, 1).toUpperCase() + typeS[0].substring(1).toLowerCase();
+                            type_for_class = typeS[0];
+                        }
+                        Food f = new Food(name.getText().toString(), type_for_class, unit, Float.parseFloat(calories.getText().toString()));
+                        if (proteins.getText().toString().length() <= 0) {
+                            f.setProteins(0);
+                        } else {
+                            f.setProteins(Float.parseFloat(proteins.getText().toString()));
+                        }
+                        if (glucids.getText().toString().length() <= 0) {
+                            f.setGlucids(0);
+                        } else {
+                            f.setGlucids(Float.parseFloat(glucids.getText().toString()));
+                        }
+                        if (lipids.getText().toString().length() <= 0) {
+                            f.setLipids(0);
+                        } else {
+                            f.setLipids(Float.parseFloat(lipids.getText().toString()));
+                        }
+                        if (saturated.getText().toString().length() <= 0) {
+                            f.setSaturated(0);
+                        } else {
+                            f.setSaturated(Float.parseFloat(saturated.getText().toString()));
+                        }
+                        if (fibers.getText().toString().length() <= 0) {
+                            f.setFibers(0);
+                        } else {
+                            f.setFibers(Float.parseFloat(fibers.getText().toString()));
+                        }
+                        if (iron.getText().toString().length() <= 0) {
+                            f.setIron(0);
+                        } else {
+                            f.setIron(Float.parseFloat(iron.getText().toString()));
+                        }
+                        if (zinc.getText().toString().length() <= 0) {
+                            f.setZinc(0);
+                        } else {
+                            f.setZinc(Float.parseFloat(zinc.getText().toString()));
+                        }
+                        if (magnesium.getText().toString().length() <= 0) {
+                            f.setMagnesium(0);
+                        } else {
+                            f.setMagnesium(Float.parseFloat(magnesium.getText().toString()));
+                        }
+                        if (manganese.getText().toString().length() <= 0) {
+                            f.setManganese(0);
+                        } else {
+                            f.setManganese(Float.parseFloat(manganese.getText().toString()));
+                        }
+                        if (om3.getText().toString().length() <= 0) {
+                            f.setOm3(0);
+                        } else {
+                            f.setOm3(Float.parseFloat(om3.getText().toString()));
+                        }
+                        if (om6.getText().toString().length() <= 0) {
+                            f.setOm6(0);
+                        } else {
+                            f.setOm6(Float.parseFloat(om6.getText().toString()));
+                        }
+                        if (om9.getText().toString().length() <= 0) {
+                            f.setOm9(0);
+                        } else {
+                            f.setOm9(Float.parseFloat(om9.getText().toString()));
+                        }
 
-                if((name.getText().length()<0)&&(Float.parseFloat(calories.getText().toString())<=0)){
-                    Toast toast = Toast.makeText(getApplicationContext(),"Name, Type, Unit and Calories values are required", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                else {
+                        f.setCurrentValue(0);
 
-                    Food f = new Food(name.getText().toString(), type, unit, Float.parseFloat(calories.getText().toString()));
-
-                    f.setProteins(Float.parseFloat(proteins.getText().toString()));
-                    f.setGlucids(Float.parseFloat(glucids.getText().toString()));
-                    f.setLipids(Float.parseFloat(lipids.getText().toString()));
-                    f.setSaturated(Float.parseFloat(saturated.getText().toString()));
-                    f.setFibers(Float.parseFloat(fibers.getText().toString()));
-                    f.setIron(Float.parseFloat(iron.getText().toString()));
-                    f.setZinc(Float.parseFloat(zinc.getText().toString()));
-                    f.setMagnesium(Float.parseFloat(magnesium.getText().toString()));
-                    f.setManganese(Float.parseFloat(manganese.getText().toString()));
-                    f.setOm3(Float.parseFloat(om3.getText().toString()));
-                    f.setOm6(Float.parseFloat(om6.getText().toString()));
-                    f.setOm9(Float.parseFloat(om9.getText().toString()));
+                    FoodDatabase db = Room.databaseBuilder(getApplicationContext(),
+                            FoodDatabase.class, "food_database").allowMainThreadQueries().build();
+                    FoodDao foodDao = db.foodDao();
+                    foodDao.insert(f);
+                    db.close();
 
                     Intent intent = new Intent(getApplicationContext(), FoodActivity.class);
                     intent.putExtra("food_datas", f);
                     setResult(Activity.RESULT_OK, intent);
+                    finish();
                 }
             }
         });
@@ -132,6 +199,9 @@ public class AddFoodActivity extends AppCompatActivity {
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FoodActivity.class);
+                setResult(Activity.RESULT_OK);
+                finish();
              }
         });
 
@@ -145,40 +215,64 @@ public class AddFoodActivity extends AppCompatActivity {
                 }
                 else{
                     radioGroupType.setVisibility(View.GONE);
-                    switch (radioGroupType.getCheckedRadioButtonId()) {
-
-                        case R.id.radioButton_redMeat:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.red_meat_icon));
-
-                        case R.id.radioButton_whiteMeat:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.white_meat_icon));
-
-                        case R.id.radioButton_seaFood:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.sea_food_icon));
-
-                        case R.id.radioButton_vegetables:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.vegetables_icon));
-
-                        case R.id.radioButton_eggs:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.eggs_icon));
-
-                        case R.id.radioButton_dairy:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.dairy_icon));
-
-                        case R.id.radioButton_nuts:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.nuts_icon));
-
-                        case R.id.radioButton_cereals:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.cereals_icon));
-
-                        case R.id.radioButton_fruits:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.fruits_icon));
-
-                        case R.id.radioButton_supplements:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.supplements_icon));
-
-                        case R.id.radioButton_meal:
-                            imageView.setImageDrawable(getResources().getDrawable(R.drawable.meal_icon));
+                    Resources resources = getApplicationContext().getResources();
+                    int resourceId;
+                    int checkedRadioButtonId = radioGroupType.getCheckedRadioButtonId();
+                    if (checkedRadioButtonId == R.id.radioButton_redMeat) {
+                        type = "red_meat_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_whiteMeat) {
+                        type = "white_meat_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_seaFood) {
+                        type = "sea_food_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_vegetables) {
+                        type = "vegetable_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_eggs) {
+                        type = "egg_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_dairy) {
+                        type = "dairy_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_nuts) {
+                        type = "nut_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_cereals) {
+                        type = "cereal_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_fruits) {
+                        type = "fruit_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_supplements) {
+                        type = "supplement_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
+                    } else if (checkedRadioButtonId == R.id.radioButton_meal) {
+                        type = "meal_icon";
+                        resourceId = resources.getIdentifier(type, "drawable",
+                                getApplicationContext().getPackageName());
+                        imageView.setImageDrawable(resources.getDrawable(resourceId));
                     }
                 }
             }
@@ -192,6 +286,17 @@ public class AddFoodActivity extends AppCompatActivity {
                 }
                 else{
                     radioGroupUnit.setVisibility(View.GONE);
+                    int checkedRadioButtonId = radioGroupUnit.getCheckedRadioButtonId();
+                    if (checkedRadioButtonId == R.id.radioButton_unit){
+                        unit = "unit";
+                        unitButton.setText("unit");
+                    }else if (checkedRadioButtonId == R.id.radioButton_gram){
+                        unit = "gram";
+                        unitButton.setText("gram");
+                    }else if (checkedRadioButtonId == R.id.radioButton_ml){
+                        unit = "ml";
+                        unitButton.setText("ml");
+                    }
                 }
             }
         });
@@ -199,12 +304,52 @@ public class AddFoodActivity extends AppCompatActivity {
         vitaminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if(radioGroupVitamin.getVisibility()==(View.GONE)) {
-                radioGroupVitamin.setVisibility(View.VISIBLE);
-            }
-            else{
-                radioGroupVitamin.setVisibility(View.GONE);
-            }
+                if (radioGroupVitamin.getVisibility() == (View.GONE)) {
+                    radioGroupVitamin.setVisibility(View.VISIBLE);
+                } else {
+                    radioGroupVitamin.setVisibility(View.GONE);
+                    int checkedRadioButtonId = radioGroupVitamin.getCheckedRadioButtonId();
+                    if (checkedRadioButtonId == R.id.radioButton_vitamin_a) {
+                        mainVitamin = "A";
+                        vitaminButton.setText("vit A");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b1) {
+                        mainVitamin = "B1";
+                        vitaminButton.setText("vit B1");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b2) {
+                        mainVitamin = "B2";
+                        vitaminButton.setText("vit B2");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b3) {
+                        mainVitamin = "B3";
+                        vitaminButton.setText("vit B3");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b5) {
+                        mainVitamin = "B5";
+                        vitaminButton.setText("vit B5");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b6) {
+                        mainVitamin = "B6";
+                        vitaminButton.setText("vit B6");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b8) {
+                        mainVitamin = "B8";
+                        vitaminButton.setText("vit B8");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b9) {
+                        mainVitamin = "B9";
+                        vitaminButton.setText("vit B9");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b12) {
+                        mainVitamin = "B12";
+                        vitaminButton.setText("vit B12");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_c) {
+                        mainVitamin = "C";
+                        vitaminButton.setText("vit C");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_d) {
+                        mainVitamin = "D";
+                        vitaminButton.setText("vit D");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_e) {
+                        mainVitamin = "E";
+                        vitaminButton.setText("vit E");
+                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_k) {
+                        mainVitamin = "K";
+                        vitaminButton.setText("vit k");
+                    }
+                }
             }
         });
 

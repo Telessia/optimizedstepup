@@ -85,8 +85,7 @@
         android:text="@string/unit"
         app:layout_constraintLeft_toRightOf="@+id/add_type"
         app:layout_constraintTop_toBottomOf="@id/add_name"
-        app:layout_constraintRight_toRightOf="parent"
-                tools:targetApi="p">
+        app:layout_constraintRight_toRightOf="parent">
 
     </Button>
         </LinearLayout>
@@ -291,79 +290,106 @@
             android:id="@+id/radioButton_vitamin_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_a" />
+            android:text="@string/vitamin_a"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b1" />
+            android:text="@string/vitamin_b1"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b2" />
+            android:text="@string/vitamin_b2"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b3"/>
+            android:text="@string/vitamin_b3"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
+
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b5" />
+            android:text="@string/vitamin_b5"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b6" />
+            android:text="@string/vitamin_b6"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b8" />
+            android:text="@string/vitamin_b8"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b9" />
+            android:text="@string/vitamin_b9"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b12" />
+            android:text="@string/vitamin_b12"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_c" />
+            android:text="@string/vitamin_c"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_d" />
+            android:text="@string/vitamin_d"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_e"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_e" />
+            android:text="@string/vitamin_e"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_k"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_k" />
+            android:text="@string/vitamin_k"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
     </RadioGroup>
 
     <RadioGroup
@@ -378,77 +404,91 @@
             android:id="@+id/radioButton_redMeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/red_meat" />
+            app:useMaterialThemeColors="false"
+            android:text="@string/red_meat"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_whiteMeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/white_meat" />
+            app:useMaterialThemeColors="false"
+            android:text="@string/white_meat"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_seaFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/sea_food" />
+            android:text="@string/sea_food"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_nuts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/nuts" />
+            android:text="@string/nuts"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_cereals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cereals" />
+            android:text="@string/cereals"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_vegetables"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vegetables" />
+            android:text="@string/vegetables"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_fruits"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fruits" />
+            android:text="@string/fruits"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_dairy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/dairy" />
+            android:text="@string/dairy"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_eggs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/eggs" />
+            android:text="@string/eggs"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_supplements"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/supplements" />
+            android:text="@string/supplements"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_meal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/meals" />
+            android:text="@string/meals"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
     </RadioGroup>
 
     <RadioGroup
@@ -463,21 +503,25 @@
             android:id="@+id/radioButton_gram"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/gram" />
+            android:text="@string/gram"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_ml"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ml" />
+            android:text="@string/ml"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_unit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/unit" />
-
-
+            android:text="@string/unit"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
     </RadioGroup>
 
     <Button

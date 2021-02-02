@@ -111,7 +111,7 @@
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
                 android:inputType="numberDecimal"
-                android:hint="value">
+                android:hint="0">
             </EditText>
             </GridLayout>
 

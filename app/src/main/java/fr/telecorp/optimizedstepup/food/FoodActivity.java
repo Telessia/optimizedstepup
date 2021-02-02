@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -53,24 +55,25 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
          */
 
         /* DATABASE THREAD */
-        new Thread(new Runnable() {
-            public void run() {
+        //  new Thread(new Runnable() {
+        //    public void run() {
 
-                FoodDatabase db = Room.databaseBuilder(getApplicationContext(),
-                        FoodDatabase.class, "food_database").build();
-                FoodDao foodDao = db.foodDao();
-                Food f = new Food("Tuna","SeaFood","gram",100);
-                //foodDao.insert(f);
-                List<Food> lf = foodDao.getAll();
-                foodDataset = FoodList.toFoodList(lf);
-            }
-        }).start();
+        FoodDatabase db = Room.databaseBuilder(getApplicationContext(),
+                FoodDatabase.class, "food_database").allowMainThreadQueries().build();
+        FoodDao foodDao = db.foodDao();
+        foodDao.nukeTable();
+        Food f = new Food("Tuna", "Sea Food", "gram", 100);
+        foodDao.insert(f);
+        List<Food> lf = foodDao.getAll();
+        foodDataset = FoodList.toFoodList(lf);
+        //  }
+        //}).start();
         /* DATABASE THREAD */
 
-        toolbar=findViewById(R.id.food_toolbar);
+        toolbar = findViewById(R.id.food_toolbar);
         setSupportActionBar(toolbar);
-        drawerLayout=findViewById(R.id.food_drawer);
-        navigationView=findViewById(R.id.food_nav);
+        drawerLayout = findViewById(R.id.food_drawer);
+        navigationView = findViewById(R.id.food_nav);
        /* toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +87,7 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
                 toolbar,
                 R.string.open_food_nav,
                 R.string.close_food_nav
-                );
+        );
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
@@ -100,18 +103,43 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        foodAdapter = new FoodAdapter(foodDataset);
+        foodAdapter = new FoodAdapter(foodDataset, this);
         recyclerView.setAdapter(foodAdapter);
 
+        /*CONFIRM*/
+        Button confirmButton = findViewById(R.id.confirm_food);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FoodDatabase db = Room.databaseBuilder(getApplicationContext(),
+                        FoodDatabase.class, "food_database").allowMainThreadQueries().build();
+                FoodDao foodDao = db.foodDao();
+
+               /* for(int i=0;i<foodDataset;)
+                foodDao.insert(f);
+                TODO
+                */
+                db.close();
+
+
+                Intent intent = new Intent(getApplicationContext(), FoodActivity.class);
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
+        });
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            Food f = data.getParcelableExtra("food_datas");
-            foodDataset.add(f);
-            foodAdapter.notifyDataSetChanged();
+            try {
+                Food f = data.getParcelableExtra("food_datas");
+                foodDataset.add(f);
+                foodAdapter.notifyDataSetChanged();
+            }catch (NullPointerException e){
+                //NOTHING
+            }
             //save(this, remindlist);
         }
     }
@@ -149,72 +177,58 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
 */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-
-            case R.id.food_all:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter(null);
-                searchView.setEnabled(true);
-                break;
-            case R.id.redmeat:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("red_meat");
-                searchView.setEnabled(false);
-                break;
-            case R.id.whitemeat:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("white_meat");
-                searchView.setEnabled(false);
-                break;
-            case R.id.cereals:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("cereals");
-                searchView.setEnabled(false);
-                break;
-            case R.id.dairy:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("dairy");
-                searchView.setEnabled(false);
-                break;
-            case R.id.eggs:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("eggs");
-                searchView.setEnabled(false);
-                break;
-            case R.id.nuts:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("nuts");
-                searchView.setEnabled(false);
-                break;
-            case R.id.seafood:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("sea_food");
-                searchView.setEnabled(false);
-                break;
-            case R.id.fruits:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("fruits");
-                searchView.setEnabled(false);
-                break;
-            case R.id.vegetables:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("vegetables");
-                searchView.setEnabled(false);
-                break;
-            case R.id.supplements:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("supplements");
-                searchView.setEnabled(false);
-                break;
-            case R.id.meal:
-                foodAdapter.restoreFilter();
-                foodAdapter.getFilterByType().filter("meal");
-                searchView.setEnabled(false);
-                break;
-            case R.id.add_food:
-                Intent intent = new Intent(this, AddFoodFragment.class);
-                startActivityForResult(intent, ADD_KEY);
-                break;
+        int itemId = menuItem.getItemId();
+        if (itemId == R.id.food_all) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter(null);
+            searchView.setEnabled(true);
+        } else if (itemId == R.id.redmeat) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Red meat");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.whitemeat) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("White meat");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.cereals) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Cereals");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.dairy) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Dairy");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.eggs) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Eggs");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.nuts) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Nuts");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.seafood) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Sea food");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.fruits) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Fruits");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.vegetables) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Vegetables");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.supplements) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Supplements");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.meal) {
+            foodAdapter.restoreFilter();
+            foodAdapter.getFilterByType().filter("Meal");
+            searchView.setEnabled(false);
+        } else if (itemId == R.id.add_food) {
+            Intent intent = new Intent(this, AddFoodActivity.class);
+            startActivityForResult(intent, ADD_KEY);
         }
         return true;
     }
@@ -223,4 +237,6 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+
 }
