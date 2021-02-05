@@ -4,7 +4,8 @@
     <group android:checkableBehavior="single">
         <item android:id="@+id/food_all"
             android:title="ALL"
-            android:icon="@drawable/arrow_cut_icon"/>
+            android:icon="@drawable/arrow_cut_icon"
+            android:iconTint="@color/White"/>
         <item android:id="@+id/redmeat"
             android:title="@string/red_meat"
             android:icon="@drawable/red_meat_icon" />
@@ -42,7 +43,8 @@
     <group>
      <item android:icon="@drawable/sharp_add_black_18dp"
             android:title="Add"
-            android:id="@+id/add_food"/>
+            android:id="@+id/add_food"
+         android:iconTint="@color/White"/>
     </group>
 
 </menu>

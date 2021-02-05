@@ -13,10 +13,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
-import androidx.room.util.StringUtil;
 
 import fr.telecorp.optimizedstepup.R;
+import fr.telecorp.optimizedstepup.database.FoodDatabase;
 
 public class AddFoodActivity extends AppCompatActivity {
 
@@ -69,7 +68,6 @@ public class AddFoodActivity extends AppCompatActivity {
         unitButton = findViewById(R.id.add_unit);
         vitaminButton = findViewById(R.id.add_mainvitamin);
         radioGroupType = findViewById(R.id.radioGroupType);
-        radioGroupType.check(R.id.radioButton_eggs);
         radioGroupUnit = findViewById(R.id.radioGroupUnit);
         radioGroupUnit.check(R.id.radioButton_gram);
         radioGroupVitamin  = findViewById(R.id.radioGroupVitamin);
@@ -93,6 +91,14 @@ public class AddFoodActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.add_image);
 
+        radioGroupType.check(R.id.cereals);
+        type = "cereal_icon";
+        Resources resources = getApplicationContext().getResources();
+        int resourceId;
+        resourceId = resources.getIdentifier(type, "drawable",
+                getApplicationContext().getPackageName());
+        imageView.setImageDrawable(resources.getDrawable(resourceId));
+
         /*   CONFIRM  */
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +108,7 @@ public class AddFoodActivity extends AppCompatActivity {
                 radioButtonUnit = findViewById(radioGroupUnit.getCheckedRadioButtonId());
                 radioButtonVitamin = findViewById(radioGroupVitamin.getCheckedRadioButtonId());
 
-                    if (name.getText().length() <= 0 || Float.parseFloat(calories.getText().toString()) <= 0) {
+                    if (name.getText().toString().length() <= 0 || calories.getText().toString().length() <= 0) {
                         Toast toast = Toast.makeText(getApplicationContext(), "Name, Type, Unit and Calories values are required", Toast.LENGTH_LONG);
                         toast.show();
                     } else {
@@ -179,11 +185,7 @@ public class AddFoodActivity extends AppCompatActivity {
 
                         f.setCurrentValue(0);
 
-                    FoodDatabase db = Room.databaseBuilder(getApplicationContext(),
-                            FoodDatabase.class, "food_database").allowMainThreadQueries().build();
-                    FoodDao foodDao = db.foodDao();
-                    foodDao.insert(f);
-                    db.close();
+                        FoodDatabase.getInstance(getApplicationContext()).foodDao().insert(f);
 
                     Intent intent = new Intent(getApplicationContext(), FoodActivity.class);
                     intent.putExtra("food_datas", f);
@@ -208,16 +210,25 @@ public class AddFoodActivity extends AppCompatActivity {
         /*   EXIT  */
 
         typeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(radioGroupType.getVisibility()==(View.GONE)) {
-                    radioGroupType.setVisibility(View.VISIBLE);
-                }
-                else{
+                                          @Override
+                                          public void onClick(View v) {
+                                              if (radioGroupType.getVisibility() == (View.GONE)) {
+                                                  radioGroupType.setVisibility(View.VISIBLE);
+                                              }
+                                              else{
+                                                  radioGroupType.setVisibility(View.GONE);
+                                              }
+                                          }
+                                      });
+
+
+            radioGroupType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedRadioButtonId) {
                     radioGroupType.setVisibility(View.GONE);
                     Resources resources = getApplicationContext().getResources();
                     int resourceId;
-                    int checkedRadioButtonId = radioGroupType.getCheckedRadioButtonId();
+
                     if (checkedRadioButtonId == R.id.radioButton_redMeat) {
                         type = "red_meat_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
@@ -275,8 +286,7 @@ public class AddFoodActivity extends AppCompatActivity {
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
                     }
                 }
-            }
-        });
+            });
 
         unitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -308,51 +318,58 @@ public class AddFoodActivity extends AppCompatActivity {
                     radioGroupVitamin.setVisibility(View.VISIBLE);
                 } else {
                     radioGroupVitamin.setVisibility(View.GONE);
-                    int checkedRadioButtonId = radioGroupVitamin.getCheckedRadioButtonId();
-                    if (checkedRadioButtonId == R.id.radioButton_vitamin_a) {
-                        mainVitamin = "A";
-                        vitaminButton.setText("vit A");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b1) {
-                        mainVitamin = "B1";
-                        vitaminButton.setText("vit B1");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b2) {
-                        mainVitamin = "B2";
-                        vitaminButton.setText("vit B2");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b3) {
-                        mainVitamin = "B3";
-                        vitaminButton.setText("vit B3");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b5) {
-                        mainVitamin = "B5";
-                        vitaminButton.setText("vit B5");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b6) {
-                        mainVitamin = "B6";
-                        vitaminButton.setText("vit B6");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b8) {
-                        mainVitamin = "B8";
-                        vitaminButton.setText("vit B8");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b9) {
-                        mainVitamin = "B9";
-                        vitaminButton.setText("vit B9");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b12) {
-                        mainVitamin = "B12";
-                        vitaminButton.setText("vit B12");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_c) {
-                        mainVitamin = "C";
-                        vitaminButton.setText("vit C");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_d) {
-                        mainVitamin = "D";
-                        vitaminButton.setText("vit D");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_e) {
-                        mainVitamin = "E";
-                        vitaminButton.setText("vit E");
-                    } else if (checkedRadioButtonId == R.id.radioButton__vitamin_k) {
-                        mainVitamin = "K";
-                        vitaminButton.setText("vit k");
-                    }
                 }
             }
         });
+        radioGroupVitamin.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedRadioButtonId)
+            {
+                radioButtonVitamin.setVisibility(View.GONE);
+                if (checkedRadioButtonId == R.id.radioButton_vitamin_a) {
+                    mainVitamin = "A";
+                    vitaminButton.setText("vit A");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b1) {
+                    mainVitamin = "B1";
+                    vitaminButton.setText("vit B1");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b2) {
+                    mainVitamin = "B2";
+                    vitaminButton.setText("vit B2");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b3) {
+                    mainVitamin = "B3";
+                    vitaminButton.setText("vit B3");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b5) {
+                    mainVitamin = "B5";
+                    vitaminButton.setText("vit B5");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b6) {
+                    mainVitamin = "B6";
+                    vitaminButton.setText("vit B6");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b8) {
+                    mainVitamin = "B8";
+                    vitaminButton.setText("vit B8");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b9) {
+                    mainVitamin = "B9";
+                    vitaminButton.setText("vit B9");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_b12) {
+                    mainVitamin = "B12";
+                    vitaminButton.setText("vit B12");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_c) {
+                    mainVitamin = "C";
+                    vitaminButton.setText("vit C");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_d) {
+                    mainVitamin = "D";
+                    vitaminButton.setText("vit D");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_e) {
+                    mainVitamin = "E";
+                    vitaminButton.setText("vit E");
+                } else if (checkedRadioButtonId == R.id.radioButton__vitamin_k) {
+                    mainVitamin = "K";
+                    vitaminButton.setText("vit k");
+                }
+            }
+    });
 
-    }
+}
 }
 

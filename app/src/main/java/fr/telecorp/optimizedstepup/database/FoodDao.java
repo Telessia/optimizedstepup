@@ -1,4 +1,4 @@
-package fr.telecorp.optimizedstepup.food;
+package fr.telecorp.optimizedstepup.database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,6 +7,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+
+import fr.telecorp.optimizedstepup.food.Food;
 
 @Dao
 public interface FoodDao {
@@ -30,4 +32,7 @@ public interface FoodDao {
 
     @Update
     public int updateFoods(List<Food> foods);
+
+    @Query("SELECT * FROM food WHERE currentvalue > 0")
+    List<Food> getValuableFood();
 }

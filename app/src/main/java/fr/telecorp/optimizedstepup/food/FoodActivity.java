@@ -18,15 +18,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.telecorp.optimizedstepup.R;
-import fr.telecorp.optimizedstepup.food.fragments.AddFoodFragment;
+import fr.telecorp.optimizedstepup.database.FoodDatabase;
 
 public class FoodActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -58,13 +56,7 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         //  new Thread(new Runnable() {
         //    public void run() {
 
-        FoodDatabase db = Room.databaseBuilder(getApplicationContext(),
-                FoodDatabase.class, "food_database").allowMainThreadQueries().build();
-        FoodDao foodDao = db.foodDao();
-        foodDao.nukeTable();
-        Food f = new Food("Tuna", "Sea Food", "gram", 100);
-        foodDao.insert(f);
-        List<Food> lf = foodDao.getAll();
+        List<Food> lf = FoodDatabase.getInstance(getApplicationContext()).foodDao().getAll();
         foodDataset = FoodList.toFoodList(lf);
         //  }
         //}).start();
@@ -111,15 +103,15 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FoodDatabase db = Room.databaseBuilder(getApplicationContext(),
-                        FoodDatabase.class, "food_database").allowMainThreadQueries().build();
-                FoodDao foodDao = db.foodDao();
 
-               /* for(int i=0;i<foodDataset;)
-                foodDao.insert(f);
-                TODO
-                */
-                db.close();
+                for (int childCount = recyclerView.getChildCount(), i = 0; i < childCount; ++i) {
+                    final FoodAdapter.FoodViewHolder holder = (FoodAdapter.FoodViewHolder) recyclerView.getChildViewHolder(recyclerView.getChildAt(i));
+                        if(holder.value.getText().toString().length()>0) {
+                            foodDataset.get(i).setCurrentValue(Integer.parseInt(holder.value.getText().toString()));
+                            FoodDatabase.getInstance(getApplicationContext()).foodDao().updateFood(foodDataset.get(i));
+                        }
+                }
+                //TODO see if it works
 
 
                 Intent intent = new Intent(getApplicationContext(), FoodActivity.class);
@@ -192,7 +184,7 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
             searchView.setEnabled(false);
         } else if (itemId == R.id.cereals) {
             foodAdapter.restoreFilter();
-            foodAdapter.getFilterByType().filter("Cereals");
+            foodAdapter.getFilterByType().filter("Cereal");
             searchView.setEnabled(false);
         } else if (itemId == R.id.dairy) {
             foodAdapter.restoreFilter();
@@ -200,11 +192,11 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
             searchView.setEnabled(false);
         } else if (itemId == R.id.eggs) {
             foodAdapter.restoreFilter();
-            foodAdapter.getFilterByType().filter("Eggs");
+            foodAdapter.getFilterByType().filter("Egg");
             searchView.setEnabled(false);
         } else if (itemId == R.id.nuts) {
             foodAdapter.restoreFilter();
-            foodAdapter.getFilterByType().filter("Nuts");
+            foodAdapter.getFilterByType().filter("Nut");
             searchView.setEnabled(false);
         } else if (itemId == R.id.seafood) {
             foodAdapter.restoreFilter();
@@ -212,15 +204,15 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
             searchView.setEnabled(false);
         } else if (itemId == R.id.fruits) {
             foodAdapter.restoreFilter();
-            foodAdapter.getFilterByType().filter("Fruits");
+            foodAdapter.getFilterByType().filter("Fruit");
             searchView.setEnabled(false);
         } else if (itemId == R.id.vegetables) {
             foodAdapter.restoreFilter();
-            foodAdapter.getFilterByType().filter("Vegetables");
+            foodAdapter.getFilterByType().filter("Vegetable");
             searchView.setEnabled(false);
         } else if (itemId == R.id.supplements) {
             foodAdapter.restoreFilter();
-            foodAdapter.getFilterByType().filter("Supplements");
+            foodAdapter.getFilterByType().filter("Supplement");
             searchView.setEnabled(false);
         } else if (itemId == R.id.meal) {
             foodAdapter.restoreFilter();

@@ -59,7 +59,7 @@ public class Food implements Parcelable {
     @ColumnInfo(name = "MAINVITAMIN")
     private String mainVitamin = "empty";
     @ColumnInfo(name = "CURRENTVALUE")
-    private float currentValue = 0;
+    private int currentValue = 0;
 
     @Ignore
     public Food(){}
@@ -109,7 +109,7 @@ public class Food implements Parcelable {
         parcel.writeFloat(om6);
         parcel.writeFloat(om9);
         parcel.writeString(mainVitamin);
-        parcel.writeFloat(currentValue);
+        parcel.writeInt(currentValue);
     }
 
     private Food(Parcel in) {
@@ -128,7 +128,7 @@ public class Food implements Parcelable {
         this.om6 = in.readFloat();
         this.om9 = in.readFloat();
         this.mainVitamin = in.readString();
-        this.currentValue = in.readFloat();
+        this.currentValue = in.readInt();
     }
 
     public static final Creator<Food> CREATOR = new Creator<Food>() {

@@ -6,17 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/main_frag_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-        <!--android:name="fr.telecorp.optimizedstepup.fragments.MainFragment"/> //adding a fragment-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:id="@+id/coord_main">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                android:background="@color/LimeGreen">
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+    </LinearLayout>
+
+    <!--A RETENIR -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/coord_main"
+        app:layout_constraintBottom_toTopOf="@+id/xxx"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/main_frag_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0">
+
+    </androidx.fragment.app.FragmentContainerView>
+        <!--android:name="fr.telecorp.optimizedstepup.fragments.MainFragment"/> //adding a fragment-->
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/xxx">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
@@ -24,6 +60,6 @@
             android:layout_height="wrap_content"
             app:menu="@menu/nav_menu" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

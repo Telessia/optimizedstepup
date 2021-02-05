@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/LimeGreen</item>
         <item name="colorPrimaryDark">@color/DarkDarkGrey</item>
         <item name="colorAccent">@color/DodgerBlue</item>
+        <item name="android:windowBackground">@android:color/black</item>
     </style>
 
     <style name="CustomTextSize" parent="android:Theme">

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/help_button"
+        android:title="help"
+        android:icon="@drawable/interrogation"
+        app:actionViewClass="android.widget.Button" />
+
+    <item android:id="@+id/param_button"
+        android:title="params"
+        android:icon="@drawable/tree_dot"
+        app:actionViewClass="android.widget.Button" />
+</menu>

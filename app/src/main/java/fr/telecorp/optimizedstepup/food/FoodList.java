@@ -80,7 +80,7 @@ public class FoodList extends ArrayList<Food> implements Parcelable {
             food.setOm6(in.readFloat());
             food.setOm9(in.readFloat());
             food.setMainVitamin(in.readString());
-            food.setCurrentValue(in.readFloat());
+            food.setCurrentValue(in.readInt());
             this.add(food);
         }
     }

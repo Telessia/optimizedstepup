@@ -2,7 +2,6 @@ package fr.telecorp.optimizedstepup.food;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +9,16 @@ import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import fr.telecorp.optimizedstepup.R;
+import fr.telecorp.optimizedstepup.database.FoodDao;
+import fr.telecorp.optimizedstepup.database.FoodDatabase;
 import lombok.NonNull;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
@@ -64,6 +63,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     }
 
     // Create new views (invoked by the layout manager)
+    @androidx.annotation.NonNull
     @Override
     public FoodAdapter.FoodViewHolder onCreateViewHolder(ViewGroup parent,
                                                      int viewType) {
@@ -97,7 +97,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.glucids.setText("Glucids :\n" + foodDataset.get(position).getGlucids() + " g");
         holder.lipids.setText("Lipids :\n" + foodDataset.get(position).getLipids() + " g");
         holder.fibers.setText("Fibers :\n" + foodDataset.get(position).getFibers() + " g");
-        holder.value.setHint(String.valueOf(foodDataset.get(position).getCurrentValue()));
+        holder.value.setText(String.valueOf(foodDataset.get(position).getCurrentValue()));
+        holder.setIsRecyclable(false); //TODO check if it works
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -107,6 +108,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
                         switch (which){
                             case DialogInterface.BUTTON_POSITIVE:
                                 //Yes button clicked
+                                FoodDatabase db = Room.databaseBuilder(holder.itemView.getContext(),
+                                        FoodDatabase.class, "food_database").allowMainThreadQueries().build();
+                                FoodDao foodDao = db.foodDao();
+                                foodDao.delete(foodDataset.get(holder.getAdapterPosition()));
+                                db.close();
                                 foodDataset.remove(holder.getAdapterPosition());
                                 notifyDataSetChanged();
                                 break;
@@ -147,10 +153,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             Food f = (Food) iterator.next();
             originalItems.add(f);
         }
-    }
-
-    public interface OnItemLongClickListener {
-        public boolean onItemLongClicked(int position);
     }
 
     public Filter getFilterByName() {
@@ -233,4 +235,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         };
         return filter;
     }
+
+    
 }
