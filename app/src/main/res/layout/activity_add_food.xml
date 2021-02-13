@@ -22,262 +22,260 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 >
-<androidx.appcompat.widget.AppCompatImageView
-    android:id="@+id/add_image"
-    android:layout_width="120dp"
-    android:layout_height="120dp"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:src="@drawable/egg_icon">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/add_image"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:src="@drawable/egg_icon">
 
-</androidx.appcompat.widget.AppCompatImageView>
+                </androidx.appcompat.widget.AppCompatImageView>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/add_name"
-                    android:layout_width="250dp"
-                    android:layout_height="60dp"
-                    app:layout_constraintLeft_toRightOf="@+id/add_image"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:hint="@string/name"
-                    android:inputType="text"
-                    android:autofillHints="@string/name"
-                    >
-                </EditText>
+                    <EditText
+                        android:id="@+id/add_name"
+                        android:layout_width="250dp"
+                        android:layout_height="60dp"
+                        app:layout_constraintLeft_toRightOf="@+id/add_image"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:hint="@string/name"
+                        android:inputType="text"
+                        android:autofillHints="@string/name"
+                        >
+                    </EditText>
 
-                <Button
-                    android:id="@+id/add_type"
-                    android:layout_width="250dp"
-                    android:layout_height="60dp"
-                    android:text="@string/eggs"
-                    app:layout_constraintLeft_toRightOf="@+id/add_image"
-                    app:layout_constraintTop_toBottomOf="@+id/add_name">
+                    <Button
+                        android:id="@+id/add_type"
+                        android:layout_width="200dp"
+                        android:layout_height="35dp"
+                        android:text="@string/cereals"
+                        app:layout_constraintLeft_toRightOf="@+id/add_image"
+                        app:layout_constraintTop_toBottomOf="@+id/add_name">
 
-                </Button>
-            </LinearLayout>
+                    </Button>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/add_calories"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:hint="@string/calories"
-        android:autofillHints="Calories"
-        android:inputType="numberDecimal"
-        app:layout_constraintTop_toBottomOf="@+id/add_image">
+                <EditText
+                    android:id="@+id/add_calories"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:hint="@string/calories"
+                    android:autofillHints="Calories"
+                    android:inputType="numberDecimal"
+                    app:layout_constraintTop_toBottomOf="@+id/add_image">
 
-    </EditText>
+                </EditText>
 
-            <Button
-        android:id="@+id/add_unit"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:textFontWeight="700"
-        android:text="@string/unit"
-        app:layout_constraintLeft_toRightOf="@+id/add_type"
-        app:layout_constraintTop_toBottomOf="@id/add_name"
-        app:layout_constraintRight_toRightOf="parent"
-                tools:targetApi="p">
+                <Button
+                    android:id="@+id/add_unit"
+                    android:layout_width="150dp"
+                    android:layout_height="35dp"
+                    android:text="@string/unit"
+                    app:layout_constraintLeft_toRightOf="@+id/add_type"
+                    app:layout_constraintTop_toBottomOf="@id/add_name"
+                    app:layout_constraintRight_toRightOf="parent">
 
-    </Button>
-        </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-            <EditText
-        android:id="@+id/add_proteins"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_type"
-        app:layout_constraintLeft_toRightOf="@id/add_calories"
-        app:layout_constraintRight_toRightOf="parent"
-        android:hint="@string/proteins"
-        android:autofillHints="@string/proteins"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
+                </Button>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_proteins"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_type"
+                    app:layout_constraintLeft_toRightOf="@id/add_calories"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:hint="@string/proteins"
+                    android:autofillHints="@string/proteins"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
 
-    <EditText
-        android:id="@+id/add_glucids"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_calories"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:hint="@string/glucids"
-        android:autofillHints="@string/glucids"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/add_glucids"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_calories"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:hint="@string/glucids"
+                    android:autofillHints="@string/glucids"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/add_lipids"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_proteins"
-        app:layout_constraintLeft_toRightOf="@id/add_glucids"
-        app:layout_constraintRight_toRightOf="parent"
-        android:hint="@string/lipids"
-        android:autofillHints="@string/lipids"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-    <EditText
-        android:id="@+id/add_saturated"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_glucids"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:hint="@string/saturated"
-        android:autofillHints="@string/saturated"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_lipids"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_proteins"
+                    app:layout_constraintLeft_toRightOf="@id/add_glucids"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:hint="@string/lipids"
+                    android:autofillHints="@string/lipids"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+                <EditText
+                    android:id="@+id/add_saturated"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_glucids"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:hint="@string/saturated"
+                    android:autofillHints="@string/saturated"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/add_fibers"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_lipids"
-        app:layout_constraintLeft_toRightOf="@id/add_saturated"
-        app:layout_constraintRight_toRightOf="parent"
-        android:hint="@string/fibers"
-        android:autofillHints="@string/fibers"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-    <EditText
-        android:id="@+id/add_iron"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_saturated"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:hint="@string/iron"
-        android:autofillHints="@string/iron"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_fibers"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_lipids"
+                    app:layout_constraintLeft_toRightOf="@id/add_saturated"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:hint="@string/fibers"
+                    android:autofillHints="@string/fibers"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+                <EditText
+                    android:id="@+id/add_iron"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_saturated"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:hint="@string/iron"
+                    android:autofillHints="@string/iron"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/add_zinc"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_fibers"
-        app:layout_constraintLeft_toRightOf="@id/add_iron"
-        app:layout_constraintRight_toRightOf="parent"
-        android:hint="@string/zinc"
-        android:autofillHints="@string/zinc"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-    <EditText
-        android:id="@+id/add_magnesium"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_iron"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:hint="@string/magnesium"
-        android:autofillHints="@string/magnesium"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_zinc"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_fibers"
+                    app:layout_constraintLeft_toRightOf="@id/add_iron"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:hint="@string/zinc"
+                    android:autofillHints="@string/zinc"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+                <EditText
+                    android:id="@+id/add_magnesium"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_iron"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:hint="@string/magnesium"
+                    android:autofillHints="@string/magnesium"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/add_manganese"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_zinc"
-        app:layout_constraintLeft_toRightOf="@id/add_magnesium"
-        app:layout_constraintRight_toRightOf="parent"
-        android:hint="@string/manganese"
-        android:autofillHints="@string/manganese"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-    <EditText
-        android:id="@+id/add_om3"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_magnesium"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:hint="@string/om3"
-        android:autofillHints="@string/om3"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_manganese"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_zinc"
+                    app:layout_constraintLeft_toRightOf="@id/add_magnesium"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:hint="@string/manganese"
+                    android:autofillHints="@string/manganese"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+                <EditText
+                    android:id="@+id/add_om3"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_magnesium"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:hint="@string/om3"
+                    android:autofillHints="@string/om3"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/add_om6"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_manganese"
-        app:layout_constraintLeft_toRightOf="@id/add_om3"
-        app:layout_constraintRight_toRightOf="parent"
-        android:hint="@string/om6"
-        android:autofillHints="@string/om6"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-    <EditText
-        android:id="@+id/add_om9"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        app:layout_constraintTop_toBottomOf="@+id/add_om3"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:hint="@string/om9"
-        android:autofillHints="@string/om9"
-        android:inputType="numberDecimal"
-        >
-    </EditText>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/add_om6"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_manganese"
+                    app:layout_constraintLeft_toRightOf="@id/add_om3"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:hint="@string/om6"
+                    android:autofillHints="@string/om6"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+                <EditText
+                    android:id="@+id/add_om9"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintTop_toBottomOf="@+id/add_om3"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:hint="@string/om9"
+                    android:autofillHints="@string/om9"
+                    android:inputType="numberDecimal"
+                    >
+                </EditText>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/add_mainvitamin"
-                android:layout_width="match_parent"
-                android:layout_height="81dp"
-                android:text="@string/empty"
-                app:layout_constraintLeft_toRightOf="@id/add_om9"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_om6">
+                <Button
+                    android:id="@+id/add_mainvitamin"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:text="@string/empty"
+                    app:layout_constraintLeft_toRightOf="@id/add_om9"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/add_om6">
 
-            </Button>
-        </LinearLayout>
+                </Button>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-                          <!-- RADIOGROUPS -->
+    <!-- RADIOGROUPS -->
 
     <RadioGroup
         android:id="@+id/radioGroupVitamin"
@@ -291,79 +289,106 @@
             android:id="@+id/radioButton_vitamin_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_a" />
+            android:text="@string/vitamin_a"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b1" />
+            android:text="@string/vitamin_b1"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b2" />
+            android:text="@string/vitamin_b2"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b3"/>
+            android:text="@string/vitamin_b3"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
+
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b5" />
+            android:text="@string/vitamin_b5"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b6" />
+            android:text="@string/vitamin_b6"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b8" />
+            android:text="@string/vitamin_b8"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b9" />
+            android:text="@string/vitamin_b9"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_b12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_b12" />
+            android:text="@string/vitamin_b12"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_c" />
+            android:text="@string/vitamin_c"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_d" />
+            android:text="@string/vitamin_d"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_e"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_e" />
+            android:text="@string/vitamin_e"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton__vitamin_k"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vitamin_k" />
+            android:text="@string/vitamin_k"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
     </RadioGroup>
 
     <RadioGroup
@@ -378,77 +403,91 @@
             android:id="@+id/radioButton_redMeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/red_meat" />
+            app:useMaterialThemeColors="false"
+            android:text="@string/red_meat"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_whiteMeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/white_meat" />
+            app:useMaterialThemeColors="false"
+            android:text="@string/white_meat"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_seaFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/sea_food" />
+            android:text="@string/sea_food"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_nuts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/nuts" />
+            android:text="@string/nuts"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_cereals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cereals" />
+            android:text="@string/cereals"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_vegetables"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/vegetables" />
+            android:text="@string/vegetables"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_fruits"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fruits" />
+            android:text="@string/fruits"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_dairy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/dairy" />
+            android:text="@string/dairy"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_eggs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/eggs" />
+            android:text="@string/eggs"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_supplements"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@android:color/transparent"
-            android:background="@drawable/radio_custom"
-            android:text="@string/supplements" />
+            android:text="@string/supplements"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_meal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/meals" />
+            android:text="@string/meals"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
     </RadioGroup>
 
     <RadioGroup
@@ -463,27 +502,31 @@
             android:id="@+id/radioButton_gram"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/gram" />
+            android:text="@string/gram"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_ml"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/ml" />
+            android:text="@string/ml"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
 
         <RadioButton
             android:id="@+id/radioButton_unit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/unit" />
-
-
+            android:text="@string/unit"
+            android:theme="@style/RadioCustom"
+            android:background="@drawable/radio_custom"/>
     </RadioGroup>
 
     <Button
         android:id="@+id/add_confirm"
         android:layout_width="200dp"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="confirm">
@@ -492,7 +535,7 @@
     <Button
         android:id="@+id/add_exit"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/add_confirm"
         app:layout_constraintRight_toRightOf="parent"

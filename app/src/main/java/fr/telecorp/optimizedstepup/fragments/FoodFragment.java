@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.List;
 
+import fr.telecorp.optimizedstepup.MainActivity;
 import fr.telecorp.optimizedstepup.R;
 import fr.telecorp.optimizedstepup.food.Food;
 import fr.telecorp.optimizedstepup.food.FoodActivity;
@@ -52,17 +53,19 @@ public class FoodFragment extends Fragment {
     private Float om9Sum;
     private Float vitaminCount;
 
+    private String colorCheck;
+
     @RequiresApi(api = Build.VERSION_CODES.P)
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_food, null);
         btn= view.findViewById(R.id.btn_food);
         /**GET BUNDLE**/
-       /* Bundle bundle = getArguments();
+       Bundle bundle = getArguments();
         if (bundle != null) {
-            dataSet = bundle.getParcelable(DATA_KEY);
+            colorCheck = bundle.getString("colorCheck");
         }
-*/
+
         caloriesSum = 0f;
         proteinsSum = 0f;
         glucidsSum = 0f;
@@ -97,13 +100,11 @@ public class FoodFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), FoodActivity.class);
-                //intent.putExtra(DATA_KEY,(Parcelable) dataSet);
-                startActivity(intent);
+                MainActivity mainActivity = (MainActivity)getActivity();
+                assert mainActivity != null;
+                mainActivity.startFoodActivity();
             }
         });
-
-
         refresh();
         return view;
     }
@@ -155,22 +156,37 @@ public class FoodFragment extends Fragment {
         calories_text.setText(caloriesSum.toString() + " kcal");
         proteins_text.setText(proteinsSum.toString() + " g proteins");
 
+                    SharedPreferences.Editor editor = preferences.edit();
+
         Resources resources = getContext().getResources();
         int resourceId;
+        MainActivity mainActivity = (MainActivity)getActivity();
+        assert mainActivity != null;
+        String oldColorCheck = preferences.getString("colorCheck","red");
 
-        if (caloriesSum <= targetCalories*0.4f){
+        if (caloriesSum <= targetCalories*0.45f){
             resourceId = resources.getIdentifier("dino_1", "drawable",
                     getContext().getPackageName());
             healthIcon.setImageDrawable(resources.getDrawable(resourceId));
             calories_text.setTextColor(getResources().getColor(R.color.Red));
             proteins_text.setTextColor(getResources().getColor(R.color.Red));
+            editor.putString("colorCheck", "red"); // value to store
+            editor.apply();
+            if(!oldColorCheck.equals("red")){
+                mainActivity.startRecreate();
+            }
 
-        }else if (caloriesSum < targetCalories*0.9f){
+        }else if (caloriesSum < targetCalories*0.90f){
             resourceId = resources.getIdentifier("dino_2", "drawable",
                     getContext().getPackageName());
             healthIcon.setImageDrawable(resources.getDrawable(resourceId));
             calories_text.setTextColor(getResources().getColor(R.color.Orange));
             proteins_text.setTextColor(getResources().getColor(R.color.Orange));
+            editor.putString("colorCheck", "orange"); // value to store
+            editor.apply();
+            if(!oldColorCheck.equals("orange")) {
+                mainActivity.startRecreate();
+            }
 
         }else if ((caloriesSum >= targetCalories*0.95f)&&(caloriesSum <= targetCalories*1.05f)){
             resourceId = resources.getIdentifier("dino_4_lightning", "drawable",
@@ -178,13 +194,24 @@ public class FoodFragment extends Fragment {
             healthIcon.setImageDrawable(resources.getDrawable(resourceId));
             calories_text.setTextColor(getResources().getColor(R.color.Cyan));
             proteins_text.setTextColor(getResources().getColor(R.color.Cyan));
+            editor.putString("colorCheck", "cyan"); // value to store
+            editor.apply();
+            if(!oldColorCheck.equals("cyan")){
+                mainActivity.startRecreate();
+            }
 
-        }else if ((caloriesSum >= targetCalories*0.90f)&&(caloriesSum <= 1.1f)){
-            resourceId = resources.getIdentifier("dino_4_lightning", "drawable",
+
+        }else if ((caloriesSum >= targetCalories*0.90f)&&(caloriesSum <= targetCalories*1.1f)){
+            resourceId = resources.getIdentifier("dino_3", "drawable",
                     getContext().getPackageName());
             healthIcon.setImageDrawable(resources.getDrawable(resourceId));
             calories_text.setTextColor(getResources().getColor(R.color.LimeGreen));
             proteins_text.setTextColor(getResources().getColor(R.color.LimeGreen));
+            editor.putString("colorCheck", "green"); // value to store
+            editor.apply();
+            if(!oldColorCheck.equals("green")){
+                mainActivity.startRecreate();
+            }
 
         }else if (caloriesSum > targetCalories*1.1f){
             resourceId = resources.getIdentifier("dino_5", "drawable",
@@ -192,8 +219,19 @@ public class FoodFragment extends Fragment {
             healthIcon.setImageDrawable(resources.getDrawable(resourceId));
             calories_text.setTextColor(getResources().getColor(R.color.Fuchsia));
             proteins_text.setTextColor(getResources().getColor(R.color.Fuchsia));
-
+            editor.putString("colorCheck", "purple"); // value to store
+            editor.apply();
+            if(!oldColorCheck.equals("purple")){
+                mainActivity.startRecreate();
+            }
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        refresh();
     }
 
 }

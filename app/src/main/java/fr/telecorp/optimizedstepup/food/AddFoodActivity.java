@@ -70,6 +70,7 @@ public class AddFoodActivity extends AppCompatActivity {
         radioGroupType = findViewById(R.id.radioGroupType);
         radioGroupUnit = findViewById(R.id.radioGroupUnit);
         radioGroupUnit.check(R.id.radioButton_gram);
+        unit="gram";
         radioGroupVitamin  = findViewById(R.id.radioGroupVitamin);
 
         /* EDIT TEXT */
@@ -91,7 +92,7 @@ public class AddFoodActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.add_image);
 
-        radioGroupType.check(R.id.cereals);
+        radioGroupType.check(R.id.radioButton_cereals);
         type = "cereal_icon";
         Resources resources = getApplicationContext().getResources();
         int resourceId;
@@ -234,56 +235,67 @@ public class AddFoodActivity extends AppCompatActivity {
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Red Meat");
                     } else if (checkedRadioButtonId == R.id.radioButton_whiteMeat) {
                         type = "white_meat_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("White Meat");
                     } else if (checkedRadioButtonId == R.id.radioButton_seaFood) {
                         type = "sea_food_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Sea Food");
                     } else if (checkedRadioButtonId == R.id.radioButton_vegetables) {
                         type = "vegetable_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Vegetable");
                     } else if (checkedRadioButtonId == R.id.radioButton_eggs) {
                         type = "egg_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Egg");
                     } else if (checkedRadioButtonId == R.id.radioButton_dairy) {
                         type = "dairy_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Dairy");
                     } else if (checkedRadioButtonId == R.id.radioButton_nuts) {
                         type = "nut_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Nut");
                     } else if (checkedRadioButtonId == R.id.radioButton_cereals) {
                         type = "cereal_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Cereal");
                     } else if (checkedRadioButtonId == R.id.radioButton_fruits) {
                         type = "fruit_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Fruit");
                     } else if (checkedRadioButtonId == R.id.radioButton_supplements) {
                         type = "supplement_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Supplements");
                     } else if (checkedRadioButtonId == R.id.radioButton_meal) {
                         type = "meal_icon";
                         resourceId = resources.getIdentifier(type, "drawable",
                                 getApplicationContext().getPackageName());
                         imageView.setImageDrawable(resources.getDrawable(resourceId));
+                        typeButton.setText("Meal");
                     }
                 }
             });
@@ -291,24 +303,30 @@ public class AddFoodActivity extends AppCompatActivity {
         unitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(radioGroupUnit.getVisibility()==(View.GONE)) {
+                if (radioGroupUnit.getVisibility() == (View.GONE)) {
                     radioGroupUnit.setVisibility(View.VISIBLE);
-                }
-                else{
+                } else {
                     radioGroupUnit.setVisibility(View.GONE);
-                    int checkedRadioButtonId = radioGroupUnit.getCheckedRadioButtonId();
-                    if (checkedRadioButtonId == R.id.radioButton_unit){
-                        unit = "unit";
-                        unitButton.setText("unit");
-                    }else if (checkedRadioButtonId == R.id.radioButton_gram){
-                        unit = "gram";
-                        unitButton.setText("gram");
-                    }else if (checkedRadioButtonId == R.id.radioButton_ml){
-                        unit = "ml";
-                        unitButton.setText("ml");
-                    }
                 }
             }
+        });
+        radioGroupUnit.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedRadioButtonId)
+            {
+                radioGroupUnit.setVisibility(View.GONE);
+                    if (checkedRadioButtonId == R.id.radioButton_unit){
+                        unit = "unit";
+                        unitButton.setText("Unit");
+                    }else if (checkedRadioButtonId == R.id.radioButton_gram){
+                        unit = "gram";
+                        unitButton.setText("Gram");
+                    }else if (checkedRadioButtonId == R.id.radioButton_ml){
+                        unit = "ml";
+                        unitButton.setText("Ml");
+                    }
+                }
         });
 
         vitaminButton.setOnClickListener(new View.OnClickListener() {
@@ -326,7 +344,7 @@ public class AddFoodActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedRadioButtonId)
             {
-                radioButtonVitamin.setVisibility(View.GONE);
+                radioGroupVitamin.setVisibility(View.GONE);
                 if (checkedRadioButtonId == R.id.radioButton_vitamin_a) {
                     mainVitamin = "A";
                     vitaminButton.setText("vit A");

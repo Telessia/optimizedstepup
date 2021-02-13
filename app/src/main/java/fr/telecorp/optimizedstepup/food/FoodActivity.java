@@ -23,6 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
+import fr.telecorp.optimizedstepup.MainActivity;
 import fr.telecorp.optimizedstepup.R;
 import fr.telecorp.optimizedstepup.database.FoodDatabase;
 
@@ -41,8 +42,24 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
     private final static int ADD_KEY = 1;
     private SearchView searchView;
 
+    private String colorCheck;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        colorCheck = bundle.getString("colorCheck", "red");
+        if (colorCheck.equals("red")) {
+            setTheme(R.style.RedTheme);
+        } else if (colorCheck.equals("orange")) {
+            setTheme(R.style.OrangeTheme);
+        } else if (colorCheck.equals("green")) {
+            setTheme(R.style.GreenTheme);
+        } else if (colorCheck.equals("cyan")) {
+            setTheme(R.style.CyanTheme);
+        } else if (colorCheck.equals("purple")) {
+            setTheme(R.style.PurpleTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
 
@@ -64,6 +81,19 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
 
         toolbar = findViewById(R.id.food_toolbar);
         setSupportActionBar(toolbar);
+
+        if (colorCheck.equals("red")) {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.Red));
+        } else if (colorCheck.equals("orange")) {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.Orange));
+        } else if (colorCheck.equals("green")) {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.LimeGreen));
+        } else if (colorCheck.equals("cyan")) {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.Cyan));
+        } else if (colorCheck.equals("purple")) {
+            toolbar.setBackgroundColor(getResources().getColor(R.color.Fuchsia));
+        }
+
         drawerLayout = findViewById(R.id.food_drawer);
         navigationView = findViewById(R.id.food_nav);
        /* toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -106,20 +136,33 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
 
                 for (int childCount = recyclerView.getChildCount(), i = 0; i < childCount; ++i) {
                     final FoodAdapter.FoodViewHolder holder = (FoodAdapter.FoodViewHolder) recyclerView.getChildViewHolder(recyclerView.getChildAt(i));
-                        if(holder.value.getText().toString().length()>0) {
-                            foodDataset.get(i).setCurrentValue(Integer.parseInt(holder.value.getText().toString()));
-                            FoodDatabase.getInstance(getApplicationContext()).foodDao().updateFood(foodDataset.get(i));
-                        }
+                    if (holder.value.getText().toString().length() > 0) {
+                        foodDataset.get(i).setCurrentValue(Float.parseFloat(holder.value.getText().toString()));
+                        FoodDatabase.getInstance(getApplicationContext()).foodDao().updateFood(foodDataset.get(i));
+                    }
                 }
                 //TODO see if it works
 
 
-                Intent intent = new Intent(getApplicationContext(), FoodActivity.class);
-                setResult(Activity.RESULT_OK);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                setResult(Activity.RESULT_OK,intent);
                 finish();
             }
         });
+
+    /*EXIT*/
+        Button exitButton = findViewById(R.id.exit_food);
+    exitButton.setOnClickListener(new View.OnClickListener()
+
+    {
+        @Override
+        public void onClick (View v){
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        setResult(Activity.RESULT_OK,intent);
+        finish();
     }
+    });
+}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -127,6 +170,7 @@ public class FoodActivity extends AppCompatActivity implements NavigationView.On
         if (resultCode == Activity.RESULT_OK) {
             try {
                 Food f = data.getParcelableExtra("food_datas");
+                f.setCurrentValue(0);
                 foodDataset.add(f);
                 foodAdapter.notifyDataSetChanged();
             }catch (NullPointerException e){

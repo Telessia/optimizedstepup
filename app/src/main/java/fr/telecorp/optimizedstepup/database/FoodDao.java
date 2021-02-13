@@ -35,4 +35,7 @@ public interface FoodDao {
 
     @Query("SELECT * FROM food WHERE currentvalue > 0")
     List<Food> getValuableFood();
+
+    @Query("UPDATE food SET currentvalue = 0")
+    void resetCurrentValues ();
 }

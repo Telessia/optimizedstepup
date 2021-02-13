@@ -52,22 +52,16 @@
             android:layout_column="0"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:textStyle="bold">
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:textSize="12dp">
 
         </TextView>
 
             <TextView
+                android:id="@+id/calories"
                 android:layout_row="1"
                 android:layout_column="0"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:id="@+id/unit">
-            </TextView>
-
-            <TextView
-                android:id="@+id/calories"
-                android:layout_row="0"
-                android:layout_column="1"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1">
             </TextView>
@@ -75,7 +69,7 @@
 
         <TextView
             android:id="@+id/proteins"
-            android:layout_row="1"
+            android:layout_row="0"
             android:layout_column="1"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1">
@@ -84,15 +78,15 @@
 
         <TextView
             android:id="@+id/glucids"
-            android:layout_row="0"
-            android:layout_column="2"
+            android:layout_row="1"
+            android:layout_column="1"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1">
         </TextView>
 
         <TextView
             android:id="@+id/lipids"
-            android:layout_row="1"
+            android:layout_row="0"
             android:layout_column="2"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1">
@@ -100,11 +94,21 @@
 
         <TextView
             android:id="@+id/fibers"
-            android:layout_row="0"
-            android:layout_column="3"
+            android:layout_row="1"
+            android:layout_column="2"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1">
         </TextView>
+
+                <TextView
+                    android:layout_row="0"
+                    android:layout_column="3"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:id="@+id/unit"
+                    android:textStyle="bold"
+                    android:textSize="12dp">
+                </TextView>
 
             <EditText
                 android:id="@+id/value"

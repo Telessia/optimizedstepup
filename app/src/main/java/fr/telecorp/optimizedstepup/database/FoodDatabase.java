@@ -27,7 +27,7 @@ public abstract class FoodDatabase<INSTANCE> extends RoomDatabase {
             synchronized (FoodDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            FoodDatabase.class, "food_database").addMigrations(MIGRATION_1_2).allowMainThreadQueries()
+                            FoodDatabase.class, "food_database").allowMainThreadQueries()
                             .build();
                 }
             }

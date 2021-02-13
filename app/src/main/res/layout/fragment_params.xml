@@ -22,7 +22,7 @@
         android:text="Daily Calories Target"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="5dp"/>
 
     <EditText
         android:id="@+id/params_calories"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="100dp"/>
+        android:layout_marginTop="30dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         android:text="Daily Proteins Target"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="150dp"/>
+        android:layout_marginTop="90dp"/>
 
     <EditText
         android:id="@+id/params_proteins"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="115dp"/>
 
     <Button
         android:id="@+id/params_apply"
@@ -55,7 +55,9 @@
         android:text="Apply changes"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="250dp"/>
+        android:layout_marginTop="200dp"
+        android:includeFontPadding="true"
+        android:padding="8dp"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -68,7 +70,8 @@
             android:columnCount="2"
             android:rowCount="5"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent">
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:useDefaultMargins="true">
 
             <ImageView
                 android:layout_width="50dp"
@@ -82,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_row="0"
                 android:layout_column="1"
-                android:text="Inferior to 40% of targeted calories" />
+                android:text="Inferior to 45% of targeted calories" />
 
             <ImageView
                 android:layout_width="50dp"
@@ -96,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_row="1"
                 android:layout_column="1"
-                android:text=" Between 40%-85% of targeted calories \n AND proteins"/>
+                android:text=" Between 45%-90% of targeted calories \n AND proteins"/>
 
             <ImageView
                 android:layout_width="50dp"
@@ -124,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_row="3"
                 android:layout_column="1"
-                android:text=" Between 95%-105% of targeted calories \n AND proteins"/>
+                android:text=" Between 95%-110% of targeted calories \n AND proteins"/>
 
             <ImageView
                 android:layout_width="50dp"
@@ -138,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_row="4"
                 android:layout_column="1"
-                android:text=" Superior to 105% of targeted calories"/>
+                android:text=" Superior to 110% of targeted calories"/>
 
         </GridLayout>
     </RelativeLayout>

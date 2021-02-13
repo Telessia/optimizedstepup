@@ -97,7 +97,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         holder.glucids.setText("Glucids :\n" + foodDataset.get(position).getGlucids() + " g");
         holder.lipids.setText("Lipids :\n" + foodDataset.get(position).getLipids() + " g");
         holder.fibers.setText("Fibers :\n" + foodDataset.get(position).getFibers() + " g");
-        holder.value.setText(String.valueOf(foodDataset.get(position).getCurrentValue()));
+        holder.value.setHint(String.valueOf(foodDataset.get(position).getCurrentValue()));
         holder.setIsRecyclable(false); //TODO check if it works
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
